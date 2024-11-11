@@ -19,6 +19,18 @@ public class CorrentistaController {
         return "correntistas/form";
     }
 
+//    @RequestMapping("/form")
+//    public String getForm(Correntista correntista, Model model) {
+//        model.addAttribute("correntista", correntista);
+//        return "correntistas/form";
+//    }
+
+    @RequestMapping("/lista")
+    public String getList(Model model) {
+        model.addAttribute("correntistas", correntistaRepository.findAll());
+        return "correntistas/list";
+    }
+
     @RequestMapping("/save")
     public String save(Correntista correntista, Model model) {
         if(correntista.getNome() == null || correntista.getNome().isEmpty()) {
@@ -42,6 +54,7 @@ public class CorrentistaController {
             return "correntistas/form";
         }
         correntistaRepository.save(correntista);
+
         model.addAttribute("correntistas", correntistaRepository.findAll());
         return "correntistas/list";
     }

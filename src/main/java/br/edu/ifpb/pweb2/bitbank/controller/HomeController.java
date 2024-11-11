@@ -9,4 +9,7 @@ public class HomeController {
     public String showHomePage() {
         return "index";
     }
+
+//    @RequestMapping("/list")
+//    public String showCorrentistaList() { return "correntistas/list"; }
 }
