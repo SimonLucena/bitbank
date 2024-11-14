@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.bitbank.controller;
 
 import br.edu.ifpb.pweb2.bitbank.model.Correntista;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +14,22 @@ public class CorrentistaController {
     @Autowired
     private CorrentistaRepository correntistaRepository;
 
+    @PostConstruct
+    public void init() {
+        if(correntistaRepository.findAll().isEmpty()) {
+            Correntista correntista = new Correntista();
+            correntista.setNome("Correntista");
+            correntista.setEmail("correntista@gmail.com");
+            correntista.setSenha("123456");
+            correntistaRepository.save(correntista);
+        }
+    }
+
     @RequestMapping("/form")
     public String getForm(Correntista correntista, Model model) {
         model.addAttribute("correntista", correntista);
         return "correntistas/form";
     }
-
-//    @RequestMapping("/form")
-//    public String getForm(Correntista correntista, Model model) {
-//        model.addAttribute("correntista", correntista);
-//        return "correntistas/form";
-//    }
 
     @RequestMapping("/lista")
     public String getList(Model model) {
