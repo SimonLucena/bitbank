@@ -7,7 +7,7 @@
 <body>
     <h1>Cadastro de conta</h1>
 
-    <form th:action="@{contas/save}" method="post" th:object="${conta}">
+    <form th:action="@{/contas/save}" method="post" th:object="${conta}">
         <input type="hidden" th:field="*{id}" />
 
         <label for="numero">Número</label>
@@ -15,6 +15,7 @@
 
         <label for="correntista">Correntista</label>
         <select th:field="*{correntista.id}" id="correntista">
+            <option th:value="${null}" label="Selecione o correntista."></option>
             <option th:each="cor: ${correntistaItems}" th:value="${cor.id}" th:label="${cor.nome}"></option>
         </select><br><br>
 

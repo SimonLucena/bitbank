@@ -13,20 +13,21 @@ import br.edu.ifpb.pweb2.bitbank.model.Correntista;
 
 @Component
 public class CorrentistaRepository {
-    private Map<Integer, Correntista> repositorio = new HashMap<Integer, Correntista>();
+    private static Map<Integer, Correntista> repositorio = new HashMap<Integer, Correntista>();
 
     public Correntista findById(Integer id) {
         return repositorio.get(id);
     }
 
-    public void save(Correntista correntista) {
+    public Correntista save(Correntista correntista) {
         Integer id = null;
         id = (correntista.getId() == null) ? this.getMaxId() + 1 : correntista.getId();
         correntista.setId(id);
         repositorio.put(id, correntista);
+        return correntista;
     }
 
-    public List<Correntista> findAll() {
+    public static List<Correntista> findAll() {
         List<Correntista> correntistas = repositorio.values().stream().collect(Collectors.toList());
         return correntistas;
     }
